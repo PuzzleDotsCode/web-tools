@@ -12,7 +12,8 @@ DEFAULT_REGEX_PATTERNS = {
     "graphql_endpoint": re.compile(r"https?://[a-z0-9\-_\.]+/graphql"),
     "api_gateway_url": re.compile(r"https://[a-z0-9\-]+\.execute-api\.[a-z0-9\-]+\.amazonaws\.com/[^\s\"']*"),
     "jwt_token": re.compile(r"eyJ[A-Za-z0-9\-_]+\.[A-Za-z0-9\-_]+\.[A-Za-z0-9\-_]+"),
-    "public_env_var": re.compile(r"(NEXT_PUBLIC_[A-Z0-9_]+|REACT_APP_[A-Z0-9_]+)\s*[:=]\s*[\"']?.+?[\"']?")
+    "public_env_var": re.compile(r"(NEXT_PUBLIC_[A-Z0-9_]+|REACT_APP_[A-Z0-9_]+)\s*[:=]\s*[\"']?.+?[\"']?"),
+    "s3_bucket_url": re.compile(r"https://[a-z0-9\.\-_]+\.s3\.[a-z0-9\-]+\.amazonaws\.com")
 }
 
 SUPPORTED_EXTENSIONS = [".js", ".jsx", ".ts", ".tsx"]
@@ -88,7 +89,7 @@ def report(findings, report_dir):
     try:
         with open(report_path, "a") as f:
             f.write("\n".join(lines) + "\n")
-        print(f"[✓] Informe guardado en {report_path}")
+        print(f"[*] Informe guardado en {report_path}")
     except Exception as e:
         print(f"[!] No se pudo guardar el informe: {e}")
 
@@ -133,8 +134,8 @@ Ejemplos de uso:
 
     findings = analyze_directory(code_files, patterns, verbose=args.verbose, suppress_errors=suppress_errors)
 
-    if findings or not suppress_errors:
-        print("[~] Archivos encontrados para análisis:")
+    if not suppress_errors:
+        print("[*] Archivos encontrados para análisis:")
         for f in code_files:
             print(f" - {f}")
 
@@ -144,5 +145,5 @@ Ejemplos de uso:
         print("[✓] Se detectan archivos objetivo, y se detectaron fugas.")
         exit(0)
     else:
-        print("[!] Se detectan archivos objetivo, pero no se detectaron fugas.")
+        print("[-] Se detectan archivos objetivo, pero no se detectaron fugas.")
         exit(2)
