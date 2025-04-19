@@ -1,0 +1,16 @@
+Request URL:
+https://example.com/
+Remote Address:
+10.10.1.15:443
+id_client:
+xxxxxxxxxxxxxxxxxxx
+request-pathname:
+/xxxxxxxxxxxxxxxxxxx/home
+url:
+/xxxxxxxxxxxxxxxxxxx/home
+via:
+1.1 aWsWoOoW1234.cloudfront.net (CloudFront)
+:authority:
+example.com
+:path:
+/
