@@ -5,6 +5,10 @@ import argparse
 from pathlib import Path
 import sys
 
+### Nice to analise wordlists
+# 1. /usr/share/wordlists/SecLists/Discovery/Variables/awesome-environment-variable-names.txt
+# 2. /usr/share/wordlists/SecLists/Discovery/Variables/secret-keywords.txt
+
 DEFAULT_REGEX_PATTERNS = {
     "aws_access_key": re.compile(r"AKIA[0-9A-Z]{16}"),
     "aws_secret_key": re.compile(r"(?i)aws.*?(secret|key).*?['\"][A-Za-z0-9/+=]{40}['\"]"),
